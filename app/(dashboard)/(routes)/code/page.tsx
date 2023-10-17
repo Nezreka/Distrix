@@ -39,7 +39,7 @@ const CodePage = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try{
 
-            const userMessage: ChatCompletionRequestMessage = { role: "user", content: values.prompt };
+            const userMessage = { role: "user", content: values.prompt };
             const newMessages = [...messages, userMessage];
             const response = await axios.post("/api/code", {messages: newMessages})
             
