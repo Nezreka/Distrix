@@ -44,7 +44,8 @@ export async function POST(
                 ...messages
             ]
         })
-        console.log(response)
+        //console.log("response.choises[0]", response.choices[0])
+        //console.log("response.choises[0].message", response.choices[0].message)
         if(!isPro){
             await increaseApiLimit();
         }
