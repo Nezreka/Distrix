@@ -32,6 +32,7 @@ export async function POST(
         }
         const freeTrial = await checkApiLimit();
         const isPro = await checkSubscription();
+        
 
         if (!freeTrial && !isPro){
             return new NextResponse("Free trial has expired.", {status: 403});
@@ -39,15 +40,17 @@ export async function POST(
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages:[
-                {"role": "system", "content": 'You are a code generator. You must answer only in markdown code snippets. Use code comments for explanations.'},
+                {role: "system", content: 'You are a code generator. You must answer only in markdown code snippets. Use code comments for explanations.'},
                 ...messages
             ]
         })
+        console.log(response)
         if(!isPro){
             await increaseApiLimit();
         }
 
         return NextResponse.json(response.choices[0].message)
+        
     }catch(error){
         console.log("[CONVERSATION_ERROR]", error);
     }
