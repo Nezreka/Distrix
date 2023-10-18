@@ -21,7 +21,7 @@ import { BotAvatar } from "@/components/bot-avatar";
 import ReactMarkdown from "react-markdown";
 import { useProModal } from "@/hooks/use-pro-modal";
 import toast from "react-hot-toast";
-
+import OpenAI from 'openai'
 
 const CodePage = () => {
     const proModal = useProModal()
@@ -116,10 +116,10 @@ const CodePage = () => {
                                 messages.map((message) => (
                                     
                                     <div 
-                                    key={message.content}
-                                    className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted" )}
+                                    key={message.content?.toString()}
+                                    className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role?.toString() === "user" ? "bg-white border border-black/10" : "bg-muted" )}
                                     >
-                                        {message.role === "user" ? <UserAvater/> : <BotAvatar/>}
+                                        {message.role?.toString() === "user" ? <UserAvater/> : <BotAvatar/>}
                                         <ReactMarkdown
                                             components={{
                                                 pre: ({node, ...props}) => (
@@ -134,7 +134,7 @@ const CodePage = () => {
                                             }}
                                             className="text-sm overflow-hidden leading-7"
                                         >
-                                            {message.content || ""}
+                                            {message.content?.toString() || ""}
                                         </ReactMarkdown>
                                         
                                     </div>
