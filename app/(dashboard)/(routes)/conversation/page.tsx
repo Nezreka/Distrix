@@ -112,12 +112,12 @@ const ConversationPage = () => {
                             {
                                 messages.map((message) => (
                                     <div 
-                                    key={message.content}
-                                    className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted" )}
+                                    key={(message as unknown as any).content}
+                                    className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", (message as unknown as any).role === "user" ? "bg-white border border-black/10" : "bg-muted" )}
                                     >
-                                        {message.role === "user" ? <UserAvater/> : <BotAvatar/>}
+                                        {(message as unknown as any).content === "user" ? <UserAvater/> : <BotAvatar/>}
                                         <p className="text-sm">
-                                            {message.content}
+                                            {(message as unknown as any).content}
                                         </p>
                                         
                                     </div>
